@@ -1,14 +1,17 @@
+import env from './env';
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 let isRefreshing = false;
 let refreshPromise: Promise<any> | null = null;
 
+const FE_URL = env.deployUrl || 'http://localhost:3000';
 export const refreshToken = async (): Promise<any> => {
   if (isRefreshing) {
     return refreshPromise;
   }
 
   isRefreshing = true;
-  refreshPromise = fetch('http://localhost:3000/api/token', {
+  refreshPromise = fetch(`${FE_URL}/api/token`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
