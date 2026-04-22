@@ -1,59 +1,77 @@
 'use client';
+
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
+  Bell,
+  BookOpen,
+  Briefcase,
+  ClipboardList,
+  FileText,
   Home,
   MessageSquare,
-  Briefcase,
-  User,
   Settings,
-  FileText,
-  LucideIcon,
+  User,
+  type LucideIcon,
 } from 'lucide-react';
+import { useShellStore } from '@/store/shell.store';
 
 const iconMap: Record<string, LucideIcon> = {
   Home,
   MessageSquare,
   FileText,
+  BookOpen,
   Briefcase,
+  ClipboardList,
+  Bell,
   User,
   Settings,
 };
 
-interface NavItem {
+export interface SidebarNavItem {
   label: string;
   href: string;
   icon: string;
 }
 
 interface SidebarNavProps {
-  items: NavItem[];
+  items: readonly SidebarNavItem[] | SidebarNavItem[];
 }
+
 const SidebarNav = ({ items }: SidebarNavProps) => {
   const pathname = usePathname();
-  return (
-    <nav className="space-y-1">
-      {items.map(item => {
-        const isActive =
-          pathname === item.href ||
-          (item.href !== '/' && pathname.startsWith(item.href));
-        const Icon = iconMap[item.icon];
+  const setMobileSidebarOpen = useShellStore(s => s.setMobileSidebarOpen);
 
+  const isActive = (href: string) => {
+    if (href === '/') return pathname === '/';
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  return (
+    <nav className="flex flex-col gap-3" aria-label="Sidebar navigation">
+      {items.map(item => {
+        const active = isActive(item.href);
+        const Icon = iconMap[item.icon];
         return (
           <Link
             key={item.href}
             href={item.href}
-            // onClick={handleClose}
+            onClick={() => setMobileSidebarOpen(false)}
             className={cn(
-              'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
-              isActive
+              'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-200',
+              active
                 ? 'bg-primary/10 text-primary'
                 : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
             )}
           >
-            {Icon && <Icon className="h-5 w-5" />}
-            {item.label}
+            {Icon ? (
+              <Icon
+                className="h-[18px] w-[18px] shrink-0 opacity-90"
+                aria-hidden
+              />
+            ) : null}
+            <span>{item.label}</span>
           </Link>
         );
       })}

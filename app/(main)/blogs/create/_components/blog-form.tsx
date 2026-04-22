@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Loader2, X } from 'lucide-react';
+import { AlignLeft, Hash, Heading2, ImageIcon, Loader2, X } from 'lucide-react';
 import { useState, useTransition } from 'react';
 import dynamic from 'next/dynamic';
 import { commands, ICommand } from '@uiw/react-md-editor';
@@ -124,7 +124,19 @@ const BlogForm = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="border-border bg-surface shadow-card space-y-6 rounded-2xl border p-6">
         <div className="space-y-2">
-          <Label htmlFor="cover">Cover Image URL (optional)</Label>
+          <Label
+            htmlFor="cover"
+            className="text-foreground inline-flex items-center gap-2 text-sm font-medium"
+          >
+            <ImageIcon
+              className="text-muted-foreground h-4 w-4 shrink-0"
+              aria-hidden
+            />
+            Cover image URL
+            <span className="text-muted-foreground font-normal">
+              (optional)
+            </span>
+          </Label>
           <Input
             {...register('cover')}
             id="cover"
@@ -147,7 +159,16 @@ const BlogForm = () => {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="title">Title</Label>
+          <Label
+            htmlFor="title"
+            className="text-foreground inline-flex items-center gap-2 text-sm font-medium"
+          >
+            <Heading2
+              className="text-muted-foreground h-4 w-4 shrink-0"
+              aria-hidden
+            />
+            Title
+          </Label>
           <Input
             {...register('title')}
             id="title"
@@ -157,13 +178,19 @@ const BlogForm = () => {
           <p className="text-muted-foreground text-xs">
             Write a clear and descriptive title for your blog post
           </p>
-          {errors.description && (
-            <p className="text-sm text-red-500">{errors.description.message}</p>
+          {errors.title && (
+            <p className="text-destructive text-sm">{errors.title.message}</p>
           )}
         </div>
 
         <div className="space-y-2">
-          <Label>Content</Label>
+          <Label className="text-foreground inline-flex items-center gap-2 text-sm font-medium">
+            <AlignLeft
+              className="text-muted-foreground h-4 w-4 shrink-0"
+              aria-hidden
+            />
+            Content
+          </Label>
           <div className="border-border overflow-hidden rounded-lg border">
             <div className="border-border bg-muted/30 flex border-b">
               <button
@@ -207,7 +234,7 @@ const BlogForm = () => {
                       visibleDragbar={false}
                       textareaProps={{
                         placeholder:
-                          'Include all the information someone would need to answer your question...',
+                          'Write your article in Markdown. Introduce the topic, add examples, and link sources when helpful.',
                       }}
                       className="custom-md-editor"
                     />
@@ -233,12 +260,20 @@ const BlogForm = () => {
             </div>
           </div>
           {errors.description && (
-            <p className="text-sm text-red-500">{errors.description.message}</p>
+            <p className="text-destructive text-sm">
+              {errors.description.message}
+            </p>
           )}
         </div>
 
         <div className="space-y-2">
-          <Label>Tags</Label>
+          <Label className="text-foreground inline-flex items-center gap-2 text-sm font-medium">
+            <Hash
+              className="text-muted-foreground h-4 w-4 shrink-0"
+              aria-hidden
+            />
+            Tags
+          </Label>
           <div className="mb-2 flex flex-wrap gap-2">
             {selectedTags.map(tag => (
               <Badge
@@ -269,7 +304,7 @@ const BlogForm = () => {
             Add up to 5 tags to help readers discover your blog post
           </p>
           {errors.tags && (
-            <p className="text-sm text-red-500">{errors.tags.message}</p>
+            <p className="text-destructive text-sm">{errors.tags.message}</p>
           )}
         </div>
 

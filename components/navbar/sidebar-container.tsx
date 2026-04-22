@@ -1,20 +1,38 @@
 'use client';
-import React, { useState } from 'react';
-import SidebarCloseButton from '../buttons/sidebar-close-button';
+
+import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { useShellStore } from '@/store/shell.store';
 
 interface SidebarContainerProps {
   children: React.ReactNode;
 }
+
 const SidebarContainer = ({ children }: SidebarContainerProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const pathname = usePathname();
+  const { mobileSidebarOpen, setMobileSidebarOpen } = useShellStore();
+
+  useEffect(() => {
+    setMobileSidebarOpen(false);
+  }, [pathname, setMobileSidebarOpen]);
+
   return (
     <>
-      <SidebarCloseButton isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      {mobileSidebarOpen && (
+        <button
+          type="button"
+          aria-label="Close menu"
+          className="bg-background/75 fixed inset-0 z-40 backdrop-blur-sm transition-opacity duration-200 lg:hidden"
+          onClick={() => setMobileSidebarOpen(false)}
+        />
+      )}
       <aside
         className={cn(
-          'border-border bg-sidebar fixed top-16 left-0 z-40 h-[calc(100vh-4rem)] w-72 border-r transition-transform duration-300 lg:sticky lg:translate-x-0',
-          isOpen ? 'translate-x-0' : '-translate-x-full',
+          'border-sidebar-border bg-sidebar fixed top-14 left-0 z-50 flex h-[calc(100vh-3.5rem)] w-70 flex-col pl-5 transition-transform duration-300 ease-out lg:sticky lg:top-14 lg:z-30 lg:translate-x-0',
+          mobileSidebarOpen
+            ? 'translate-x-0'
+            : '-translate-x-full lg:translate-x-0',
         )}
       >
         {children}

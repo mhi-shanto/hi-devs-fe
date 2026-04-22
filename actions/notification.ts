@@ -1,6 +1,6 @@
 'use server';
 import { INotificationResponse } from '@/types/notification.type';
-import { del, post } from '@/utils/methods';
+import { del } from '@/utils/methods';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 

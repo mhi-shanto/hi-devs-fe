@@ -1,12 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import {
-  Application,
-  ApplicationResponse,
-  ApplicationWithRolesResponse,
-} from '@/types/application';
-import { IUserResponse } from '@/types/user.type';
+import { Application, ApplicationWithRolesResponse } from '@/types/application';
 import { get } from '@/utils/methods';
 import { formatDistanceToNow } from 'date-fns/formatDistanceToNow';
 import {
@@ -35,7 +30,6 @@ export default async function ApplicationDetailPage({
   let application: Application | null = null;
   let error: unknown = null;
   let isJobOwner: boolean = false;
-  let isApplicant: boolean = false;
 
   try {
     const response = await get<ApplicationWithRolesResponse>(
@@ -47,7 +41,6 @@ export default async function ApplicationDetailPage({
     );
     application = response.applicationWithRoles.application;
     isJobOwner = response.applicationWithRoles.isJobOwner;
-    isApplicant = response.applicationWithRoles.isApplicant;
   } catch (err) {
     error = err;
   }

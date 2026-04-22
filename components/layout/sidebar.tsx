@@ -1,68 +1,55 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { mockTags } from '@/utils/mockdata';
 import SidebarContainer from '../navbar/sidebar-container';
 import SidebarNav from '../navbar/sidebar-nav';
-import { FileText, Hash, PlusCircle, TrendingUp } from 'lucide-react';
-import { MAIN_NAV_ITEMS, USER_NAV_ITEMS } from '@/constants/navItems';
+import { PenLine, PlusCircle } from 'lucide-react';
+import { ACCOUNT_NAV_ITEMS, MAIN_NAV_ITEMS } from '@/constants/navItems';
 
 const Sidebar = () => {
   return (
     <SidebarContainer>
-      <div className="flex h-full flex-col p-4">
-        <div className="mb-6 space-y-2">
+      <div className="flex h-full flex-col gap-6 sm:p-4">
+        <div className="flex flex-col gap-5 pt-5">
           <Button
             variant="gradient"
-            className="w-full justify-start gap-2"
+            className="h-9 w-full justify-start gap-2 rounded-lg text-sm font-medium shadow-none"
             asChild
           >
             <Link href="/questions/create">
-              <PlusCircle className="h-4 w-4" />
+              <PlusCircle className="h-4 w-4 shrink-0" aria-hidden />
               Ask Question
             </Link>
           </Button>
           <Button
             variant="outline"
-            className="w-full justify-start gap-2"
+            className="border-sidebar-border bg-sidebar-accent/30 hover:bg-sidebar-accent h-9 w-full justify-start gap-2 rounded-lg text-sm font-medium"
             asChild
           >
             <Link href="/blogs/create">
-              <FileText className="h-4 w-4" />
+              <PenLine className="h-4 w-4 shrink-0" aria-hidden />
               Write Blog
             </Link>
           </Button>
         </div>
 
-        <SidebarNav items={MAIN_NAV_ITEMS} />
-        <div className="border-sidebar-border my-4 border-t" />
-        <SidebarNav items={USER_NAV_ITEMS} />
-        <div className="border-sidebar-border my-4 border-t" />
+        <div>
+          <p className="text-muted-foreground mb-2 px-3 text-[11px] font-semibold tracking-wide uppercase">
+            Explore
+          </p>
+          <SidebarNav items={MAIN_NAV_ITEMS} />
+        </div>
 
-        <div className="flex-1 overflow-y-auto">
-          <div className="text-muted-foreground flex items-center gap-2 px-3 py-2 text-xs font-semibold tracking-wider uppercase">
-            <TrendingUp className="h-4 w-4" />
-            Trending Tags
-          </div>
-          <div className="space-y-1">
-            {mockTags.slice(0, 6).map(tag => (
-              <Link
-                key={tag.name}
-                href={`/tags/${tag.name.toLowerCase()}`}
-                className="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors"
-              >
-                <span className="flex items-center gap-2">
-                  <Hash className="text-muted-foreground h-4 w-4" />
-                  {tag.name}
-                </span>
-                <span className="text-muted-foreground text-xs">
-                  {tag.count}
-                </span>
-              </Link>
-            ))}
-          </div>
+        <div className="bg-sidebar-border h-px shrink-0" role="separator" />
+
+        <div>
+          <p className="text-muted-foreground mb-2 px-3 text-[11px] font-semibold tracking-wide uppercase">
+            Account
+          </p>
+          <SidebarNav items={ACCOUNT_NAV_ITEMS} />
         </div>
       </div>
     </SidebarContainer>
   );
 };
+
 export default Sidebar;

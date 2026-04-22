@@ -10,7 +10,7 @@ const workSans = Work_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'hi-devs',
+  title: 'Devs',
   description:
     'hi-devs connects developers, learners, and recruiters in one platform. Users can post coding problems and receive solutions, write and discover tech blogs, and apply for job listings from top recruiters. A space for learning, collaboration, and career growth.',
 };

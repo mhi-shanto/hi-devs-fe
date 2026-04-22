@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { IUserResponse, User } from '@/types/user.type';
 import EditContainer from './components/edit-container';
 import { get } from '@/utils/methods';
@@ -9,7 +10,7 @@ const EditProfilePage = async ({
   params: Promise<{ id: string }>;
 }) => {
   let user: User | null = null;
-  let error = null;
+  let error: unknown = null;
 
   try {
     const { id } = await params;
@@ -26,29 +27,38 @@ const EditProfilePage = async ({
 
   if (error) {
     return (
-      <div className="container mx-auto max-w-5xl px-4 py-12 text-center">
-        <h1 className="text-foreground mb-4 text-2xl font-bold">
-          User Not Found
-        </h1>
-        <p className="text-muted-foreground">{String(error)}</p>
+      <div className="mx-auto max-w-4xl space-y-4 p-4 py-12 text-center lg:p-6">
+        <p className="text-destructive text-sm font-medium">
+          Unable to load this profile for editing
+        </p>
+        <p className="text-muted-foreground text-sm">
+          You may not have access, or the account does not exist.
+        </p>
+        <Link
+          href="/profile"
+          className="text-primary mt-4 inline-block text-sm font-medium hover:underline"
+        >
+          Back to profile
+        </Link>
       </div>
     );
   }
 
   if (!user) {
     return (
-      <div className="container mx-auto max-w-5xl px-4 py-12 text-center">
-        <h1 className="text-foreground mb-4 text-2xl font-bold">
-          User Not Found
-        </h1>
+      <div className="mx-auto max-w-4xl space-y-4 p-4 py-12 text-center lg:p-6">
+        <p className="text-muted-foreground text-sm">User not found.</p>
+        <Link
+          href="/profile"
+          className="text-primary inline-block text-sm font-medium hover:underline"
+        >
+          Back to profile
+        </Link>
       </div>
     );
   }
-  return (
-    <>
-      <EditContainer user={user!} />
-    </>
-  );
+
+  return <EditContainer user={user} />;
 };
 
 export default EditProfilePage;

@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Clock, Heart, MessageSquare } from 'lucide-react';
+import { Heart, MessageSquare } from 'lucide-react';
 import { Blog } from '@/types/blog';
 import Image from 'next/image';
 import { formatDistanceToNow } from 'date-fns/formatDistanceToNow';

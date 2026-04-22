@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Job } from '@/types/job';
-import { Send, Eye } from 'lucide-react';
+import { Calendar, Eye, Send, UserCircle } from 'lucide-react';
 import { useState } from 'react';
 import ApplyModal from '@/components/apply-modal';
 
@@ -13,25 +13,28 @@ const JobSidebar = ({ job }: { job: Job }) => {
 
   return (
     <>
-      <Card className="bg-surface border-border gap-3! p-4">
+      <Card className="border-border bg-surface shadow-card flex flex-col gap-3 rounded-2xl border p-4">
         <Button
           variant="gradient"
-          className="w-full"
+          className="w-full rounded-lg"
           onClick={() => setShowApplyModal(true)}
           disabled={job.status === 'Closed'}
         >
-          <Send className="mr-2 h-4 w-4" />
-          {job.status === 'Open' ? 'Apply Now' : 'Position Closed'}
+          <Send className="mr-2 h-4 w-4 shrink-0" aria-hidden />
+          {job.status === 'Open' ? 'Apply now' : 'Position closed'}
         </Button>
-        <p className="text-muted-foreground text-center text-xs">
+        <p className="text-muted-foreground text-center text-xs leading-relaxed">
           {job.status === 'Open'
-            ? 'Submit your application to the employer'
-            : 'This position is no longer accepting applications'}
+            ? 'Submit your application to the employer.'
+            : 'This position is no longer accepting applications.'}
         </p>
       </Card>
 
-      <Card className="bg-surface border-border gap-2! p-4">
-        <h4 className="text-foreground font-semibold">Posted by</h4>
+      <Card className="border-border bg-surface shadow-card flex flex-col gap-3 rounded-2xl border p-4">
+        <h4 className="text-foreground flex items-center gap-2 text-sm font-semibold">
+          <UserCircle className="text-muted-foreground h-4 w-4" aria-hidden />
+          Posted by
+        </h4>
         <div className="flex items-center gap-3">
           <Avatar>
             <AvatarImage
@@ -54,20 +57,23 @@ const JobSidebar = ({ job }: { job: Job }) => {
         )}
       </Card>
 
-      <Card className="bg-surface border-border gap-3! p-4">
-        <h4 className="text-foreground font-semibold">Job Stats</h4>
-        <div className="space-y-3">
-          <div className="flex items-center justify-between text-sm">
+      <Card className="border-border bg-surface shadow-card flex flex-col gap-3 rounded-2xl border p-4">
+        <h4 className="text-foreground text-sm font-semibold">At a glance</h4>
+        <div className="space-y-3 text-sm">
+          <div className="flex items-center justify-between gap-2">
             <span className="text-muted-foreground flex items-center gap-2">
-              <Eye className="h-4 w-4" />
+              <Eye className="h-4 w-4 shrink-0 opacity-80" aria-hidden />
               Views
             </span>
-            <span className="text-foreground font-medium">245</span>
+            <span className="text-foreground font-medium tabular-nums">—</span>
           </div>
 
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">Posted</span>
-            <span className="text-foreground font-medium">
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-muted-foreground flex items-center gap-2">
+              <Calendar className="h-4 w-4 shrink-0 opacity-80" aria-hidden />
+              Listed
+            </span>
+            <span className="text-foreground max-w-[60%] truncate text-right font-medium">
               {new Date(job.createdAt).toLocaleDateString()}
             </span>
           </div>

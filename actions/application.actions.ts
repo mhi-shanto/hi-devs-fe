@@ -45,10 +45,14 @@ export async function updateApplicationStatus(
     const response = await patch<{
       message: string;
       application: Application;
-    }>(`/api/applications/${applicationId}`, { status }, {
-      isAuthenticated: true,
-      token,
-    });
+    }>(
+      `/api/applications/${applicationId}`,
+      { status },
+      {
+        isAuthenticated: true,
+        token,
+      },
+    );
     revalidatePath(`/applications/${applicationId}`);
     return {
       success: true,

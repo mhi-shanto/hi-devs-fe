@@ -91,7 +91,9 @@ export default async function ApplicationsPage({ searchParams }: PageProps) {
   if (jobError || !job) {
     return (
       <div className="container mx-auto max-w-3xl px-4 py-12 text-center">
-        <h1 className="text-foreground mb-2 text-2xl font-bold">Job not found</h1>
+        <h1 className="text-foreground mb-2 text-2xl font-bold">
+          Job not found
+        </h1>
         <p className="text-muted-foreground mb-6 text-sm">
           {jobError != null ? String(jobError) : 'Unable to load this job.'}
         </p>
@@ -202,7 +204,9 @@ export default async function ApplicationsPage({ searchParams }: PageProps) {
                             {applicant?.email && (
                               <p className="text-muted-foreground mt-0.5 flex items-center gap-1.5 text-sm">
                                 <Mail className="h-3.5 w-3.5 shrink-0" />
-                                <span className="truncate">{applicant.email}</span>
+                                <span className="truncate">
+                                  {applicant.email}
+                                </span>
                               </p>
                             )}
                           </div>
@@ -217,7 +221,11 @@ export default async function ApplicationsPage({ searchParams }: PageProps) {
                             <Clock className="h-3.5 w-3.5" />
                             Applied {appliedAgo}
                           </span>
-                          <Badge className={applicationStatusBadgeClassCn(app.status)}>
+                          <Badge
+                            className={applicationStatusBadgeClassCn(
+                              app.status,
+                            )}
+                          >
                             {app.status}
                           </Badge>
                         </div>

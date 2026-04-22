@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { QuestionFormData, QuestionSchema } from '@/schemas/question';
 import { logError } from '@/utils/apiError';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { X } from 'lucide-react';
+import { AlignLeft, Hash, Heading2, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -108,7 +108,16 @@ const QuestionForm = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="border-border bg-surface shadow-card space-y-6 rounded-2xl border p-6">
         <div className="space-y-2">
-          <Label htmlFor="title">Title</Label>
+          <Label
+            htmlFor="title"
+            className="text-foreground inline-flex items-center gap-2 text-sm font-medium"
+          >
+            <Heading2
+              className="text-muted-foreground h-4 w-4 shrink-0"
+              aria-hidden
+            />
+            Title
+          </Label>
           <Input
             {...register('title')}
             id="title"
@@ -120,12 +129,18 @@ const QuestionForm = () => {
             person
           </p>
           {errors.title && (
-            <p className="text-sm text-red-500">{errors.title.message}</p>
+            <p className="text-destructive text-sm">{errors.title.message}</p>
           )}
         </div>
 
         <div className="space-y-2">
-          <Label>Details</Label>
+          <Label className="text-foreground inline-flex items-center gap-2 text-sm font-medium">
+            <AlignLeft
+              className="text-muted-foreground h-4 w-4 shrink-0"
+              aria-hidden
+            />
+            Details
+          </Label>
           <div className="border-border overflow-hidden rounded-lg border">
             <div className="border-border bg-muted/30 flex border-b">
               <button
@@ -195,12 +210,20 @@ const QuestionForm = () => {
             </div>
           </div>
           {errors.description && (
-            <p className="text-sm text-red-500">{errors.description.message}</p>
+            <p className="text-destructive text-sm">
+              {errors.description.message}
+            </p>
           )}
         </div>
 
         <div className="space-y-2">
-          <Label>Tags</Label>
+          <Label className="text-foreground inline-flex items-center gap-2 text-sm font-medium">
+            <Hash
+              className="text-muted-foreground h-4 w-4 shrink-0"
+              aria-hidden
+            />
+            Tags
+          </Label>
           <div className="mb-2 flex flex-wrap gap-2">
             {selectedTags.map(tag => (
               <Badge
@@ -231,7 +254,7 @@ const QuestionForm = () => {
             Add up to 5 tags to describe what your question is about
           </p>
           {errors.tags && (
-            <p className="text-sm text-red-500">{errors.tags.message}</p>
+            <p className="text-destructive text-sm">{errors.tags.message}</p>
           )}
         </div>
 

@@ -4,48 +4,85 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-background: hsl(265 25% 12%);
-  --color-foreground: hsl(260 6% 96%);
-  --color-surface: hsl(265 22% 16%);
-  --color-muted: hsl(265 20% 22%);
-  --color-muted-foreground: hsl(265 15% 65%);
-  --color-primary: hsl(265 85% 60%);
-  --color-primary-foreground: hsl(260 6% 98%);
-  --color-accent: hsl(275 75% 55%);
-  --color-accent-foreground: hsl(260 6% 98%);
-  --color-secondary: hsl(265 20% 20%);
-  --color-secondary-foreground: hsl(260 6% 90%);
+  /* Base — lifted navy (less mud, clearer layer separation) */
+  --color-background: hsl(220 42% 11%);
+  --color-foreground: hsl(228 45% 93%);
+
+  /* Card & Popover */
+  --color-card: hsl(220 36% 16%);
+  --color-card-foreground: hsl(228 45% 93%);
+  --color-popover: hsl(220 36% 16%);
+  --color-popover-foreground: hsl(228 45% 93%);
+
+  /* Primary — sapphire (same hue family as surfaces, reads cohesive on dark) */
+  --color-primary: hsl(228 55% 52%);
+  --color-primary-foreground: hsl(220 45% 98%);
+
+  /* Secondary — muted blue-violet (tones with navy, not pastel lavender) */
+  --color-secondary: hsl(238 38% 24%);
+  --color-secondary-foreground: hsl(228 40% 92%);
+
+  /* Tertiary — restrained teal */
+  --color-tertiary: hsl(172 45% 46%);
+  --color-tertiary-foreground: hsl(220 45% 8%);
+
+  /* Muted */
+  --color-muted: hsl(220 32% 20%);
+  --color-muted-foreground: hsl(222 18% 68%);
+
+  /* Surface */
+  --color-surface: hsl(220 34% 15%);
+
+  /* Accent — matches primary family */
+  --color-accent: hsl(225 48% 28%);
+  --color-accent-foreground: hsl(228 45% 93%);
+
+  /* Destructive */
   --color-destructive: hsl(0 72% 51%);
   --color-destructive-foreground: hsl(0 0% 100%);
-  --color-border: hsl(265 18% 28%);
-  --color-input: hsl(265 18% 25%);
-  --color-ring: hsl(270 90% 65%);
-  --color-card: hsl(265 22% 16%);
-  --color-card-foreground: hsl(260 6% 96%);
-  --color-popover: hsl(265 22% 18%);
-  --color-popover-foreground: hsl(260 6% 96%);
 
-  --color-sidebar: hsl(260 18% 8%);
-  --color-sidebar-foreground: hsl(260 6% 90%);
-  --color-sidebar-primary: hsl(265 85% 55%);
-  --color-sidebar-primary-foreground: hsl(260 6% 98%);
-  --color-sidebar-accent: hsl(260 18% 14%);
-  --color-sidebar-accent-foreground: hsl(260 6% 96%);
-  --color-sidebar-border: hsl(260 14% 16%);
-  --color-sidebar-ring: hsl(270 90% 60%);
+  /* Border / Input / Ring */
+  --color-border: hsl(220 24% 26%);
+  --color-input: hsl(220 28% 22%);
+  --color-ring: hsl(228 55% 58%);
 
-  --color-chart-1: hsl(220 70% 50%);
-  --color-chart-2: hsl(160 60% 45%);
-  --color-chart-3: hsl(30 80% 55%);
-  --color-chart-4: hsl(280 65% 60%);
-  --color-chart-5: hsl(340 75% 55%);
+  /* On-surface tokens */
+  --color-on-surface: hsl(228 42% 94%);
+  --color-on-surface-variant: hsl(222 16% 66%);
+  --color-outline-variant: hsl(220 22% 32%);
+
+  /* Surface hierarchy */
+  --color-surface-container-lowest: hsl(220 48% 8%);
+  --color-surface-container-low: hsl(220 40% 13%);
+  --color-surface-container: hsl(220 34% 15%);
+  --color-surface-container-high: hsl(220 30% 19%);
+  --color-surface-container-highest: hsl(220 28% 22%);
+  --color-surface-bright: hsl(220 24% 28%);
+  --color-surface-tint: hsl(228 55% 52%);
+
+  /* Sidebar */
+  --color-sidebar: hsl(220 40% 13%);
+  --color-sidebar-foreground: hsl(228 45% 92%);
+  --color-sidebar-primary: hsl(228 55% 52%);
+  --color-sidebar-primary-foreground: hsl(220 45% 98%);
+  --color-sidebar-accent: hsl(220 30% 19%);
+  --color-sidebar-accent-foreground: hsl(228 45% 93%);
+  --color-sidebar-border: hsl(220 24% 22%);
+  --color-sidebar-ring: hsl(228 55% 58%);
+
+  /* Charts — sapphire / teal / slate accents */
+  --color-chart-1: hsl(228 55% 55%);
+  --color-chart-2: hsl(172 45% 48%);
+  --color-chart-3: hsl(248 40% 58%);
+  --color-chart-4: hsl(200 42% 52%);
+  --color-chart-5: hsl(340 55% 58%);
 
   --font-sans: var(--font-work-sans);
   --font-mono: var(--font-geist-mono);
   --default-font-family: var(--font-work-sans);
   --default-mono-font-family: var(--font-geist-mono);
 
-  --radius: 0.75rem;
+  --radius: 1rem;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -53,14 +90,47 @@
 }
 
 :root {
+  /* Gradients — sapphire / midnight blue family (matches raised navy bg, not pastel purple) */
   --gradient-primary: linear-gradient(
-    135deg,
-    hsl(265 85% 60%) 0%,
-    hsl(275 75% 55%) 100%
+    130deg,
+    hsl(226 52% 38%) 0%,
+    hsl(228 48% 46%) 45%,
+    hsl(232 44% 52%) 100%
   );
-  --gradient-glow: 0 4px 30px hsl(265 85% 60% / 0.35);
-  --shadow-card: 0 4px 20px hsl(265 25% 8% / 0.5);
-  --shadow-elevated: 0 8px 40px hsl(265 25% 8% / 0.6);
+  --gradient-aurora: linear-gradient(
+    125deg,
+    hsl(224 50% 34%) 0%,
+    hsl(228 48% 44%) 38%,
+    hsl(232 42% 50%) 70%,
+    hsl(198 38% 42%) 100%
+  );
+  --gradient-aurora-subtle: linear-gradient(
+    135deg,
+    hsl(228 50% 50% / 0.12),
+    hsl(232 45% 55% / 0.08),
+    hsl(200 40% 45% / 0.06)
+  );
+
+  /* Soft glow in the same hue range as surfaces */
+  --gradient-glow: 0 4px 28px hsl(228 50% 45% / 0.28);
+
+  --glow-primary: 0 0 36px -10px hsl(228 48% 48% / 0.25);
+  --glow-aurora: 0 0 48px -12px hsl(232 40% 50% / 0.18);
+
+  /* Shadow system */
+  --shadow-xs: 0 1px 2px hsl(220 60% 2% / 0.3);
+  --shadow-sm: 0 1px 3px hsl(220 60% 2% / 0.4), 0 1px 2px hsl(220 60% 2% / 0.3);
+  --shadow-md:
+    0 4px 6px -1px hsl(220 60% 2% / 0.4), 0 2px 4px -2px hsl(220 60% 2% / 0.3);
+  --shadow-lg:
+    0 10px 15px -3px hsl(220 60% 2% / 0.45),
+    0 4px 6px -4px hsl(220 60% 2% / 0.3);
+  --shadow-xl:
+    0 20px 25px -5px hsl(220 60% 2% / 0.5),
+    0 8px 10px -6px hsl(220 60% 2% / 0.3);
+  --shadow-card: var(--shadow-sm);
+  --shadow-card-hover: var(--shadow-lg);
+  --shadow-elevated: var(--shadow-xl);
 }
 
 @layer base {
@@ -69,7 +139,15 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply text-foreground min-h-screen antialiased;
+    background-color: var(--color-background);
+    background-image: radial-gradient(
+      ellipse 120% 55% at 50% -15%,
+      hsl(228 38% 18% / 0.55),
+      hsl(220 36% 13% / 0.35) 42%,
+      transparent 68%
+    );
+    background-attachment: fixed;
   }
 
   h1 {
@@ -94,8 +172,16 @@
     background: var(--gradient-primary);
   }
 
+  .gradient-aurora {
+    background: var(--gradient-aurora);
+  }
+
+  .gradient-aurora-subtle {
+    background: var(--gradient-aurora-subtle);
+  }
+
   .gradient-text {
-    background: var(--gradient-primary);
+    background: var(--gradient-aurora);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -105,8 +191,20 @@
     box-shadow: var(--gradient-glow);
   }
 
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+
+  .glow-aurora {
+    box-shadow: var(--glow-aurora);
+  }
+
   .shadow-card {
     box-shadow: var(--shadow-card);
+  }
+
+  .shadow-card-hover {
+    box-shadow: var(--shadow-card-hover);
   }
 
   .shadow-elevated {
