@@ -42,7 +42,6 @@ export async function proxy(request: NextRequest) {
   }
 
   if (!accessToken && !refreshToken) {
-    console.warn('⚠️ No access token found, redirecting to login');
     return NextResponse.redirect(
       new URL(
         `/signin?callbackUrl=${encodeURIComponent(pathname)}`,

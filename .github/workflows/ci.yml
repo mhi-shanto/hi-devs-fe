@@ -8,7 +8,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
+      # Repository variables: Settings → Secrets and variables → Actions → Variables
+      # Both must be set there (or map secrets below). `vars` does NOT read "Secrets" tab.
       NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
+      NEXT_PUBLIC_DEPLOY_URL: ${{ vars.NEXT_PUBLIC_DEPLOY_URL }}
       NEXT_TELEMETRY_DISABLED: 1
     steps:
       - name: Checkout
